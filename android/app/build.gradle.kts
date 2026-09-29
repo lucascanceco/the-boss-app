@@ -65,11 +65,8 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // 🔥 CONFIGURACIÓN OFICIAL DE FIREBASE USANDO EL BoM DE TU CAPTURA
-    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
-    
-    // Al usar el BoM, las versiones se gestionan solas y no chocan entre sí
-    implementation("com.google.firebase:firebase-database")
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-messaging")
+    // 🔥 Firebase (Importación directa de versiones fijas livianas para evitar OutOfMemory)
+    implementation("com.google.firebase:firebase-database-ktx:20.3.0")
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
 }
