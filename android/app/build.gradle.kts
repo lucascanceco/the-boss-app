@@ -6,7 +6,6 @@ plugins {
 }
 
 android {
-    // Corregido para coincidir exactamente con tu consola de Firebase
     namespace = "com.theboss.lavadopremium"
     compileSdk = 34
 
