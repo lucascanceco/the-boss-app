@@ -1,10 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
     id("com.google.devtools.ksp")
 }
 
 android {
+    // Corregido para coincidir exactamente con tu consola de Firebase
     namespace = "com.theboss.lavadopremium"
     compileSdk = 34
 
@@ -59,14 +61,13 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    // Room Database
+    // Room Database (Offline Storage)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // 🔥 Firebase Nativo Autónomo (Acceso directo a librerías sin plugins restrictivos)
+    // Firebase (Librerías estables ligeras)
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
-    implementation("com.google.firebase:firebase-common-ktx:20.4.2")
 }
