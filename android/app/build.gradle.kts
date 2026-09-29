@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services") // Activa el plugin de Firebase de la captura
     id("com.google.devtools.ksp")
 }
 
@@ -49,12 +49,11 @@ android {
 
 dependencies {
     // AndroidX & Core
-    implementation(dependencies.enforcePlatform("androidx.core:core-ktx:1.12.0"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     
-    // Jetpack Compose & Material 3 (Declaración Nativa en Bloque)
+    // Jetpack Compose & Material 3
     implementation("androidx.compose.ui:ui:1.6.1")
     implementation("androidx.compose.ui:ui-graphics:1.6.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.1")
@@ -66,14 +65,11 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Firebase (Encapsulado estructural puro para evitar mutación diferida)
-    implementation("com.google.firebase:firebase-database:20.3.0") {
-        isTransitive = true
-    }
-    implementation("com.google.firebase:firebase-auth:22.3.1") {
-        isTransitive = true
-    }
-    implementation("com.google.firebase:firebase-messaging:23.4.1") {
-        isTransitive = true
-    }
+    // 🔥 CONFIGURACIÓN OFICIAL DE FIREBASE USANDO EL BoM DE TU CAPTURA
+    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
+    
+    // Al usar el BoM, las versiones se gestionan solas y no chocan entre sí
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-messaging")
 }
