@@ -1,8 +1,7 @@
-plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-}
+apply(plugin = "com.android.application")
+apply(plugin = "org.jetbrains.kotlin.android")
+apply(plugin = "com.google.gms.google-services")
+apply(plugin = "com.google.devtools.ksp")
 
 android {
     namespace = "com.theboss.lavadopremium"
@@ -66,11 +65,4 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-messaging:23.4.1")
-}
-
-// Inyección segura al final del ciclo para evitar mutación de dependencias
-dvhApplyGoogleServicesPlugin()
-
-fun dvhApplyGoogleServicesPlugin() {
-    plugins.apply("com.google.gms.google-services")
 }
