@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services") // Activa el plugin de Firebase de la captura
     id("com.google.devtools.ksp")
 }
 
@@ -65,8 +64,13 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // 🔥 Firebase (Importación directa de versiones fijas livianas para evitar OutOfMemory)
+    // Firebase (Aislado de la cola de Gradle)
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
+}
+
+// Inyección diferida segura para que Firebase no altere los recursos de Room
+project.afterEvaluate {
+    plugins.apply("com.google.gms.google-services")
 }
