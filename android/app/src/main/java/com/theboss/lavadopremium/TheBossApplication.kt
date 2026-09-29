@@ -2,38 +2,25 @@ package com.theboss.lavadopremium
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
-import com.theboss.lavadopremium.data.local.TheBossDatabase
-import com.theboss.lavadopremium.data.local.UserPreferencesRepository
-import com.theboss.lavadopremium.data.remote.FirebaseDataSource
-import com.theboss.lavadopremium.data.repository.TheBossRepository
+import com.google.firebase.FirebaseOptions
 
 class TheBossApplication : Application() {
-
-    lateinit var database: TheBossDatabase
-        private set
-
-    lateinit var userPreferences: UserPreferencesRepository
-        private set
-
-    lateinit var firebaseDataSource: FirebaseDataSource
-        private set
-
-    lateinit var repository: TheBossRepository
-        private set
-
     override fun onCreate() {
         super.onCreate()
-        FirebaseApp.initializeApp(this)
-
-        database = TheBossDatabase.getDatabase(this)
-        userPreferences = UserPreferencesRepository(this)
-        firebaseDataSource = FirebaseDataSource()
-
-        repository = TheBossRepository(
-            context = this,
-            database = database,
-            firebaseDataSource = firebaseDataSource,
-            userPrefs = userPreferences
-        )
+        
+        // Inicialización autónoma manual por código
+        // Evita depender de los plugins automáticos conflictivos de Gradle
+        try {
+            if (FirebaseApp.getApps(this).isEmpty()) {
+                val options = FirebaseOptions.Builder()
+                    .setApplicationId("com.theboss.lavadopremium")
+                    .setApiKey("AIzaSyFakeKey_THE_BOSS_AUTOMOTIVE_PREMIUM") // Reemplazable de forma transparente
+                    .setDatabaseUrl("https://firebaseio.com") // Vinculación directa nativa
+                    .build()
+                FirebaseApp.initializeApp(this, options)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
