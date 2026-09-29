@@ -1,34 +1,27 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.theboss.lavadopremium"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.theboss.lavadopremium"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
-        versionName = "1.0.0"
-
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        vectorDrawables { useSupportLibrary = true }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -42,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     packaging {
         resources {
@@ -52,41 +45,27 @@ android {
 }
 
 dependencies {
-    // AndroidX & Core
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    implementation("androidx.activity:activity-compose:1.9.3")
-
-    // Jetpack Compose & Material 3
-    implementation(platform("androidx.compose:compose-bom:2024.10.00"))
+    // AndroidX & Compose Base
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
+    
+    // UI Jetpack Compose & Material 3
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.navigation:navigation-compose:2.8.3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    // Room Database (Offline local persistence)
-    val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    // Room Database (Local & Offline)
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
 
-    // Firebase (Realtime Database, Anonymous Auth, FCM)
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    // Firebase (Plataforma, Database, Auth Anónimo y Cloud Messaging)
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
-
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
-
-    // DataStore / SharedPreferences for Session (Lucas / Franco)
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-
-    // UI Tools
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
