@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services") // Declaración nativa limpia
     id("com.google.devtools.ksp")
 }
 
@@ -60,13 +59,14 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    // Room Database (Local Storage)
+    // Room Database
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // 🔥 Firebase (Importación limpia de módulos esenciales sin BOM para máxima ligereza en servidor)
+    // 🔥 Firebase Nativo Autónomo (Acceso directo a librerías sin plugins restrictivos)
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-messaging-ktx:23.4.1")
+    implementation("com.google.firebase:firebase-common-ktx:20.4.2")
 }
